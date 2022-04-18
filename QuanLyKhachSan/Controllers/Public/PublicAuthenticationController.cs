@@ -28,7 +28,7 @@ namespace QuanLyKhachSan.Controllers.Public
         {
             User user = new User()
             {
-                userName = form["email"],
+                userName = form["userName"],
                 password = form["password"]
             };
             string passwordMd5 = userDao.md5(form["password"]);
@@ -41,17 +41,37 @@ namespace QuanLyKhachSan.Controllers.Public
             }
             else
             {
-                ViewBag.mess = "Thông tin tài khoản hoặc mật khẩu không chính xác";
+                ViewBag.mess = "Error";
                 return View("Login");
             }
 
         }
 
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(User user,FormCollection form)
         {
-
-            return View();
+            string rePassword = form["rePassword"];
+            bool checkExistUserName = userDao.checkExistUsername(user.userName);
+            if (checkExistUserName)
+            {
+                ViewBag.mess = "ErrorExist";
+                return View("Login");
+            } else
+            {
+                if (!user.password.Equals(rePassword))
+                {
+                    ViewBag.mess = "ErrorPassword";
+                    return View("Login");
+                }
+                else
+                {
+                    user.password = userDao.md5(user.password);
+                    user.idRole = 3;
+                    userDao.add(user);
+                    ViewBag.mess = "Success";
+                    return View("Login");
+                }            
+            }
         }
         public ActionResult Logout()
         {
