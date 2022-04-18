@@ -23,6 +23,10 @@ namespace QuanLyKhachSan.Models
 
         [StringLength(255)]
         [Required]
+        public string email { get; set; }
+
+        [StringLength(255)]
+        [Required]
         public string password { get; set; }
 
         [StringLength(255)]

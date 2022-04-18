@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace QuanLyKhachSan.Daos
@@ -59,6 +61,19 @@ namespace QuanLyKhachSan.Daos
             obj.phoneNumber = user.phoneNumber;
             obj.gender = user.gender;
             myDb.SaveChanges();
+        }
+
+        public string md5(string password)
+        {
+            MD5 md = MD5.Create();
+            byte[] inputString = System.Text.Encoding.ASCII.GetBytes(password);
+            byte[] hash = md.ComputeHash(inputString);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x"));
+            }
+            return sb.ToString();
         }
     }
 }
