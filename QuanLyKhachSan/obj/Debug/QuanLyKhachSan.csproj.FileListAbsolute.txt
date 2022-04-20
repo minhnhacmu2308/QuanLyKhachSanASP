@@ -84,3 +84,4 @@ D:\Project Asp.Net\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.pdb
 D:\Project Asp.Net\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.Migrations._new.resources
 D:\Project Asp.Net\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.csproj.GenerateResource.cache
 D:\Project Asp.Net\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.Migrations.new1.resources
+D:\Project Asp.Net\QuanLyKhachSan\QuanLyKhachSan\obj\Debug\QuanLyKhachSan.Migrations.new2.resources

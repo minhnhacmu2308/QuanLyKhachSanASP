@@ -56,10 +56,10 @@ namespace QuanLyKhachSan.Daos
             var obj = myDb.users.FirstOrDefault(x => x.idUser == user.idUser);
             obj.fullName = user.fullName;
             obj.userName = user.userName;
-            obj.password = user.password;
             obj.address = user.address;
             obj.phoneNumber = user.phoneNumber;
             obj.gender = user.gender;
+            obj.email = user.email;
             myDb.SaveChanges();
         }
 

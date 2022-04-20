@@ -131,8 +131,15 @@
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
     <Compile Include="Controllers\Admin\AdminModulesController.cs" />
     <Compile Include="Controllers\Public\PublicAuthenticationController.cs" />
+    <Compile Include="Controllers\Public\PublicBookingController.cs" />
     <Compile Include="Controllers\Public\PublicHomeController.cs" />
     <Compile Include="Controllers\Public\PublicModulesController.cs" />
+    <Compile Include="Controllers\Public\PublicRoomController.cs" />
+    <Compile Include="Controllers\Public\PublicUserController.cs" />
+    <Compile Include="Daos\BookingDao.cs" />
+    <Compile Include="Daos\BookingServiceDao.cs" />
+    <Compile Include="Daos\RoomDao.cs" />
+    <Compile Include="Daos\ServiceDao.cs" />
     <Compile Include="Daos\UserDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -144,6 +151,10 @@
     <Compile Include="Migrations\202204181917359_new1.cs" />
     <Compile Include="Migrations\202204181917359_new1.designer.cs">
       <DependentUpon>202204181917359_new1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204191519297_new2.cs" />
+    <Compile Include="Migrations\202204191519297_new2.designer.cs">
+      <DependentUpon>202204191519297_new2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -410,6 +421,10 @@
     <Content Include="Views\Shared\_LayoutPublic.cshtml" />
     <Content Include="Views\PublicHome\Index.cshtml" />
     <Content Include="Views\PublicAuthentication\Login.cshtml" />
+    <Content Include="Views\PublicRoom\DetailRoom.cshtml" />
+    <Content Include="Views\PublicBooking\GetBookings.cshtml" />
+    <Content Include="Views\PublicUser\ProfileUser.cshtml" />
+    <Content Include="Views\PublicRoom\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -433,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204181917359_new1.resx">
       <DependentUpon>202204181917359_new1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204191519297_new2.resx">
+      <DependentUpon>202204191519297_new2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

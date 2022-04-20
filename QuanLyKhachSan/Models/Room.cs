@@ -27,6 +27,8 @@ namespace QuanLyKhachSan.Models
 
         public int cost { get; set; }
 
+        public int view { get; set; }
+
         public int idType { get; set; }
 
         public virtual Type Type { get; set; }
