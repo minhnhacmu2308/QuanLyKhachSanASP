@@ -140,6 +140,7 @@
     <Compile Include="Daos\BookingServiceDao.cs" />
     <Compile Include="Daos\RoomDao.cs" />
     <Compile Include="Daos\ServiceDao.cs" />
+    <Compile Include="Daos\TypeDao.cs" />
     <Compile Include="Daos\UserDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -425,6 +426,7 @@
     <Content Include="Views\PublicBooking\GetBookings.cshtml" />
     <Content Include="Views\PublicUser\ProfileUser.cshtml" />
     <Content Include="Views\PublicRoom\Index.cshtml" />
+    <Content Include="Views\PublicRoom\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

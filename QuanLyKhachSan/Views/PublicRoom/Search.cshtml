@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_LayoutPublic.cshtml";
 }
-<div class="hero-wrap js-fullheight" style="background-image: url('https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/4/17/799236/KHACH-SAN.jpg'); height: 350px ">
+<div class="hero-wrap js-fullheight" style="background-image: url('https://ezcloud.vn/wp-content/uploads/2019/07/1533966485504_8785368-1.jpg'); height: 400px">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-9 text-center" style="margin-top: 200px" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Trang chủ</a></span> <span>Phòng</span></p>
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Phòng trống trong hệ thống</h1>
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Trang chủ</a></span> <span>Tìm kiếm</span></p>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Kết quả tìm kiếm</h1>
             </div>
         </div>
     </div>
@@ -19,6 +19,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
+                    @if(ViewBag.List.Count  == 0)
+                    {
+                        <h2 style="color:red;align-content:center">Không tìm thấy khết quả nào</h2>
+                    }
                     @foreach (var item in ViewBag.List)
                     {
                         <div class="col-sm col-md-6 col-lg ftco-animate">
@@ -68,7 +72,18 @@
                                 @if (ViewBag.tag > 1)
                                 {
                                     int b = ViewBag.tag - 1;
-                                    <li><a href="/PublicRoom/Index/@b">&lt;</a></li>
+                                    if (ViewBag.Key == 1)
+                                    {
+                                        <li ><a href="PublicRoom/Search?page=@b&idType=@ViewBag.idType">&lt;</a></li>
+                                    }
+                                    else if (ViewBag.key == 2)
+                                    {
+                                        <li ><a href="/PublicRoom/Search?page=@b&name=@ViewBag.name&idType=0">&lt;</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li ><a href="/PublicRoom/Search?page=@b&name=@ViewBag.name&idType=@ViewBag.idType">&lt;</a></li>
+                                    }
 
                                 }
                                 else
@@ -79,19 +94,53 @@
                                 {
                                     if (ViewBag.tag == i)
                                     {
-                                        <li class="active"><a href="/PublicRoom/Index/@i">@i</a></li>
+                                        if (ViewBag.Key == 1)
+                                        {
+                                            <li class="active"><a href="PublicRoom/Search?page=@i&idType=@ViewBag.idType">@i</a></li>
+                                        }
+                                        else if (ViewBag.key == 2)
+                                        {
+                                            <li class="active"><a href="/PublicRoom/Search?page=@i&name=@ViewBag.name&idType=0">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="active"><a href="/PublicRoom/Search?page=@i&name=@ViewBag.name&idType=@ViewBag.idType">@i</a></li>
+                                        }
+
                                     }
                                     else
                                     {
-                                        <li ><a href="/PublicRoom/Index/@i">@i</a></li>
+                                        if (ViewBag.Key == 1)
+                                        {
+                                            <li><a href="PublicRoom/Search?page=@i&idType=@ViewBag.idType">@i</a></li>
+                                        }
+                                        else if (ViewBag.key == 2)
+                                        {
+                                            <li><a href="/PublicRoom/Search?page=@i&name=@ViewBag.name&idType=0">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/PublicRoom/Search?page=@i&name=@ViewBag.name&idType=@ViewBag.idType">@i</a></li>
+                                        }
                                     }
 
                                 }
-                              
+
                                 @if (ViewBag.tag < ViewBag.pageSize)
                                 {
                                     int a = ViewBag.tag + 1;
-                                    <li><a href="/PublicRoom/Index/@a">&gt;</a></li>
+                                    if (ViewBag.Key == 1)
+                                    {
+                                        <li><a href="PublicRoom/Search?page=@a&idType=@ViewBag.idType">&gt;</a></li>
+                                    }
+                                    else if (ViewBag.key == 2)
+                                    {
+                                        <li><a href="/PublicRoom/Search?page=@a&name=@ViewBag.name&idType=0">&gt;</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/PublicRoom/Search?page=@a&name=@ViewBag.name&idType=@ViewBag.idType">&gt;</a></li>
+                                    }
 
                                 }
                                 else

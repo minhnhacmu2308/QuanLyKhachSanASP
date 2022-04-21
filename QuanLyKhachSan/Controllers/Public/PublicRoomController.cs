@@ -93,7 +93,51 @@ namespace QuanLyKhachSan.Controllers.Public
                 }
             }
         }
+              
+        [HttpPost]
+        public ActionResult Search(FormCollection form)
+        {
+            string name = form["name"];
+            int idType = Int32.Parse(form["idType"]);
+            return RedirectToAction("Search", new { page = 0, name = name, idType = idType });
+        }
 
-       
+        [HttpGet]
+        public ActionResult Search(int page,string name , int idType)
+        {
+            if (page == 0)
+            {
+                page = 1;
+            }
+            if (name == "" && idType != 0)
+            {
+                ViewBag.List = roomDao.SearchByType(page, 2, idType);
+                ViewBag.tag = page;
+                ViewBag.key = 1;
+                ViewBag.idType = idType;
+                ViewBag.pageSize = roomDao.GetNumberRoomByType(idType);
+            }
+            else if(name != "" && idType == 0)
+            {
+                ViewBag.List = roomDao.SearchByName(page, 2, name);
+                ViewBag.tag = page;
+                ViewBag.key = 2;
+                ViewBag.name = name;
+                ViewBag.pageSize = roomDao.GetNumberRoomByName(name);
+            } else if (name != "" && idType != 0)
+            {
+                ViewBag.List = roomDao.SearchByTypeAndName(page, 2,idType, name);
+                ViewBag.tag = page;
+                ViewBag.key = 3;
+                ViewBag.name = name;
+                ViewBag.idType = idType;
+                ViewBag.pageSize = roomDao.GetNumberRoomByNameAndType(name,idType);
+            }
+            else if (name == "" && idType == 0)
+            {
+                RedirectToAction("Index", "PublicHome");
+            }
+            return View();
+        }
     }
 }

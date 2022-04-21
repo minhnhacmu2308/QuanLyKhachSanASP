@@ -54,5 +54,62 @@ namespace QuanLyKhachSan.Daos
             }
             return count;
         }
+
+        public List<Room> SearchByName(int page, int pagesize,string name)
+        {
+            var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
+            return myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.name.Contains(name)).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
+        }
+
+        public List<Room> SearchByType(int page, int pagesize,int idType)
+        {
+            var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
+            return myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.idType == idType).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
+        }
+
+        public int GetNumberRoomByType(int idType)
+        {
+            var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
+            int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.idType == idType).ToList().Count;
+            int count = 0;
+            count = total / 2;
+            if (total % 2 != 0)
+            {
+                count++;
+            }
+            return count;
+        }
+
+        public int GetNumberRoomByName(string name)
+        {
+            var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
+            int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.name.Contains(name)).ToList().Count;
+            int count = 0;
+            count = total / 2;
+            if (total % 2 != 0)
+            {
+                count++;
+            }
+            return count;
+        }
+
+        public List<Room> SearchByTypeAndName(int page, int pagesize, int idType,string name)
+        {
+            var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
+            return myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.idType == idType && x.name.Contains(name)).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
+        }
+
+        public int GetNumberRoomByNameAndType(string name, int idType)
+        {
+            var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
+            int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.name.Contains(name) && x.idType == idType).ToList().Count;
+            int count = 0;
+            count = total / 2;
+            if (total % 2 != 0)
+            {
+                count++;
+            }
+            return count;
+        }
     }
 }

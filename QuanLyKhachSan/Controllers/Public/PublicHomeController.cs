@@ -11,12 +11,14 @@ namespace QuanLyKhachSan.Controllers.Public
     {
         RoomDao roomDao = new RoomDao();
         ServiceDao serviceDao = new ServiceDao();
+        TypeDao typeDao = new TypeDao();
         // GET: PublicHome
         public ActionResult Index()
         {
             ViewBag.ListRoomTop5 = roomDao.GetRoomTop5();
             ViewBag.ListRoomDiscount = roomDao.GetRoomDiscount();
             ViewBag.ListService = serviceDao.GetServicesTop5();
+            ViewBag.ListType = typeDao.GetTypes();
             ViewBag.active = "home";
             return View();
         }
