@@ -29,7 +29,11 @@ namespace QuanLyKhachSan.Daos
             return myDb.users.FirstOrDefault(x => x.idUser == id);
         }
 
-        public List<User> getListEmployee() { return myDb.users.Where(x => x.idRole == 1).ToList(); }
+        public List<User> getAdmin() { return myDb.users.Where(x => x.idRole == 1).ToList(); }
+
+        public List<User> getNV() { return myDb.users.Where(x => x.idRole == 2).ToList(); }
+
+        public List<User> getKH() { return myDb.users.Where(x => x.idRole == 3).ToList(); }
 
         public void add(User user)
         {
@@ -74,6 +78,11 @@ namespace QuanLyKhachSan.Daos
                 sb.Append(hash[i].ToString("x"));
             }
             return sb.ToString();
+        }
+
+        public List<Booking> getCheck(int id)
+        {
+            return myDb.bookings.Where(x => x.idUser == id).ToList();
         }
     }
 }

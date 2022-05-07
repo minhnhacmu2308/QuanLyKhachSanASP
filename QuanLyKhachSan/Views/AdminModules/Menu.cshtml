@@ -1,43 +1,41 @@
 ﻿
 <div id="layoutSidenav_nav">
- @*   @{ var userInfomatiom = (QuanLyChamCong.Models.User)Session["USER"]; }*@
+    @{ var userInfomatiom = (QuanLyKhachSan.Models.User)Session["ADMIN"]; }
     <nav style="background-color: #F1F1F1 !important" class="sb-sidenav accordion " id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                   aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="/AdminHome/Index">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                   Quản lý phòng
+                    Thống kê
                 </a>
-               
-             @*   <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                     data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="/CheckIn/Index">Điểm danh</a>
-                        <a class="nav-link" href="/AdditionalTimekeeping/Index">Chấm công bổ sung </a>
+                @if (userInfomatiom.idRole == 1)
+                {
+                    <a class="nav-link collapsed" href="/AdminType/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý loại phòng
+                    </a>
+                    <a class="nav-link collapsed" href="/AdminRoom/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý phòng
+                    </a>
+                    <a class="nav-link collapsed" href="/AdminUser/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý nhân viên
+                    </a>
+                    <a class="nav-link collapsed" href="/AdminUser/Customer">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý khách hàng
+                    </a>
+                }
 
-                    </nav>
-                </div>
-               
-                <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne"
-                     data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="/loaigiangvien/getall">Điểm danh</a>
-                        <a class="nav-link" href="/AdditionalTimekeeping/Index">Chấm công bổ sung </a>
-
-                    </nav>
-                </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                   aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="/AdminService/Index">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Hợp đồng
-
+                    Quản lý dịch vụ
                 </a>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                   aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="/AdminBooking/Index">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Báo cáo
-                </a>*@
+                    Quản lý booking
+                </a>
             </div>
         </div>
     </nav>

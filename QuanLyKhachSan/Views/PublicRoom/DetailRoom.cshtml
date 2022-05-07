@@ -5,7 +5,7 @@
 }
 
 
-<div class="hero-wrap js-fullheight" style="background-image: url('https://allimages.sgp1.digitaloceanspaces.com/didaudalatcom/2019/08/Hinh-anh-Khach-san-LaDaLat-Tp-da-lat-di-dau-da-Lat.jpg'); height: 400px ">
+<div class="hero-wrap js-fullheight" style="background-image: url('https://onetouchmedia.vn/wp-content/uploads/2019/10/N.NT-65-1024x683.jpg'); height: 400px ">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -69,21 +69,22 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-md-12 ">
+                    @*<div class="col-md-12 ">
                         <div class="s">
                             <div class="item">
                                 <img src="/Content/images/@ViewBag.Room.image" class="hotel-img" />
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="col-md-12 hotel-single mt-4 mb-5 ">
 
                         <h2>@ViewBag.Room.name</h2>
                         @{
                             int priceNew = ViewBag.Room.cost - ViewBag.Room.cost * ViewBag.Room.discount / 100;
                         }
-                        <h5>Giá ban đầu: @ViewBag.Room.cost VNĐ (- @ViewBag.Room.discount%)</h5>
-                        <h5>@priceNew VNĐ </h5>
+                        <h5>Giá gốc : @ViewBag.Room.cost VNĐ</h5>
+                        <h6>Giảm giá :  @ViewBag.Room.discount %</h6>
+                        <h5>Giá hiện tại : @priceNew VNĐ </h5>
                         <p class="rate mb-5">
                             <span class="loc"><a href="#"><i class="icon-map"></i><span>@ViewBag.Room.Type.name</span></a></span>
                             <span class="star">
@@ -91,15 +92,16 @@
                                 <i class="icon-star"></i>
                                 <i class="icon-star"></i>
                                 <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
+                                <i class="icon-star"></i>
                                 <span>@ViewBag.Room.view lượt xem</span>
                         </p>
-                        <p>@ViewBag.Room.description</p>
+                        <h5>Mô tả phòng</h5>
+                        <p>@Html.Raw(ViewBag.Room.description)</p>
                     </div>
 
 
                     <div class="col-md-12 hotel-single  mb-5 mt-4">
-                        <h4 class="mb-5">Booking</h4>
+                        <h4 class="mb-5">Thuê phòng</h4>
                         <form action="/PublicRoom/Booking" method="post">
                             <div class="fields">
                                 <div class="row">
@@ -142,8 +144,8 @@
 
                     </div>
 
-                    <div class="col-md-12 hotel-single  mb-5 mt-5">
-                        <h4 class="mb-4">Related Tours</h4>
+                    @*<div class="col-md-12 hotel-single  mb-5 mt-5">
+                        <h4 class="mb-4">Các phòng khác có thể bạn sẽ thích</h4>
                         <div class="row">
                             @foreach (var item in ViewBag.ListRoomRelated)
                             {
@@ -163,16 +165,14 @@
                                                         <i class="icon-star"></i>
                                                         <i class="icon-star"></i>
                                                         <i class="icon-star"></i>
-                                                        <i class="icon-star-o"></i>
+                                                        <i class="icon-star"></i>
                                                         <span>@item.view lượt xem</span>
                                                     </p>
                                                 </div>
                                                 @{
                                                     int price = item.cost - item.cost * item.discount / 100;
                                                 }
-                                                <span class="price">@price VNĐ</span>
                                             </div>
-                                            @*   <p>Far far away, behind the word mountains, far from the countries</p>*@
                                             <p class="days"><span>@item.Type.name</span></p>
                                             <hr>
                                             <p class="bottom-area d-flex">
@@ -185,7 +185,7 @@
                             }
 
                         </div>
-                    </div>
+                    </div>*@
 
                 </div>
             </div> <!-- .col-md-8 -->

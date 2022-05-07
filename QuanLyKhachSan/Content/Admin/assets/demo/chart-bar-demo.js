@@ -4,43 +4,56 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
+var m1 = document.getElementById("m1").innerHTML;
+var m2 = document.getElementById("m2").innerHTML;
+var m3 = document.getElementById("m3").innerHTML;
+var m4 = document.getElementById("m4").innerHTML;
+var m5 = document.getElementById("m5").innerHTML;
+var m6 = document.getElementById("m6").innerHTML;
+var m7 = document.getElementById("m7").innerHTML;
+var m8 = document.getElementById("m8").innerHTML;
+var m9 = document.getElementById("m9").innerHTML;
+var m10 = document.getElementById("m10").innerHTML;
+var m11 = document.getElementById("m11").innerHTML;
+var m12 = document.getElementById("m12").innerHTML;
 var myLineChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [{
-      label: "Revenue",
-      backgroundColor: "rgba(2,117,216,1)",
-      borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 6
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 15000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          display: true
-        }
-      }],
+    type: 'bar',
+    data: {
+        labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
+        datasets: [{
+            label: "Doanh thu",
+            backgroundColor: "rgba(2,117,216,1)",
+            borderColor: "rgba(2,117,216,1)",
+            data: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12],
+            // data: [50000, 50000, 50000, 50000, 50000, 50000,50000, 50000, 50000, 50000, 50000, 50000],
+        }],
     },
-    legend: {
-      display: false
+    options: {
+        scales: {
+            xAxes: [{
+                time: {
+                    unit: 'month'
+                },
+                gridLines: {
+                    display: false
+                },
+                ticks: {
+                    maxTicksLimit: 12
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 20000000,
+                    maxTicksLimit: 5
+                },
+                gridLines: {
+                    display: true
+                }
+            }],
+        },
+        legend: {
+            display: false
+        }
     }
-  }
 });

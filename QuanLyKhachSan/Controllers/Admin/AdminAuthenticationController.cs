@@ -30,12 +30,13 @@ namespace QuanLyKhachSan.Controllers.Admin
                 userName = form["userName"],
                 password = form["password"]
             };
-            bool checkLogin = userDao.checkLogin(user.userName, user.password);
+            string passwordMd5 = userDao.md5(form["password"]);
+            bool checkLogin = userDao.checkLogin(user.userName, passwordMd5);
             if (checkLogin)
             {
                 var userInformation = userDao.getUserByUserName(user.userName);
                    
-                if (userInformation.idRole != 1)
+                if (userInformation.idRole == 3)
                 {
                     ViewBag.mess = "Bạn không có quyền truy cập vào trang quản trị";
                     return View("Login");

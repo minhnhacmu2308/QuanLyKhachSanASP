@@ -19,12 +19,12 @@ namespace QuanLyKhachSan.Daos
 
         public List<Room> GetRoomTop5()
         {
-            return myDb.rooms.OrderByDescending(x => x.view).Take(5).ToList();
+            return myDb.rooms.OrderByDescending(x => x.view).Take(3).ToList();
         }
 
         public List<Room> GetRoomDiscount()
         {
-            return myDb.rooms.OrderByDescending(x => x.discount).Take(5).ToList();
+            return myDb.rooms.OrderByDescending(x => x.discount).Take(3).ToList();
         }
 
         public Room GetDetail(int id)
@@ -47,8 +47,8 @@ namespace QuanLyKhachSan.Daos
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
             int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom)).ToList().Count;
             int count = 0;
-            count = total / 10;
-            if (total % 10 != 0)
+            count = total / 3;
+            if (total % 3 != 0)
             {
                 count++;
             }
@@ -72,8 +72,8 @@ namespace QuanLyKhachSan.Daos
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
             int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.idType == idType).ToList().Count;
             int count = 0;
-            count = total / 2;
-            if (total % 2 != 0)
+            count = total / 3;
+            if (total % 3 != 0)
             {
                 count++;
             }
@@ -85,8 +85,8 @@ namespace QuanLyKhachSan.Daos
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
             int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.name.Contains(name)).ToList().Count;
             int count = 0;
-            count = total / 2;
-            if (total % 2 != 0)
+            count = total / 3;
+            if (total % 3 != 0)
             {
                 count++;
             }
@@ -104,12 +104,42 @@ namespace QuanLyKhachSan.Daos
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
             int total = myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.name.Contains(name) && x.idType == idType).ToList().Count;
             int count = 0;
-            count = total / 2;
-            if (total % 2 != 0)
+            count = total / 3;
+            if (total % 3 != 0)
             {
                 count++;
             }
             return count;
+        }
+
+        public void add(Room room)
+        {
+            myDb.rooms.Add(room);
+            myDb.SaveChanges();
+        }
+
+        public void delete(int id)
+        {
+            var obj = myDb.rooms.FirstOrDefault(x => x.idRoom == id);
+            myDb.rooms.Remove(obj);
+            myDb.SaveChanges();
+        }
+
+        public void update(Room room)
+        {
+            var obj = myDb.rooms.FirstOrDefault(x => x.idRoom == room.idRoom);
+            obj.name = room.name;
+            obj.image = room.image;
+            obj.description = room.description;
+            obj.discount = room.discount;
+            obj.cost = room.cost;
+            obj.idType = room.idType;
+            myDb.SaveChanges();
+        }
+
+        public List<Booking> getCheck(int id)
+        {
+            return myDb.bookings.Where(x => x.idRoom == id).ToList();
         }
     }
 }

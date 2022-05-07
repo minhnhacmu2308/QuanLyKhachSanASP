@@ -14,5 +14,35 @@ namespace QuanLyKhachSan.Daos
         {
             return myDb.types.ToList();
         }
+
+        public void add(QuanLyKhachSan.Models.Type type)
+        {
+            myDb.types.Add(type);
+            myDb.SaveChanges();
+        }
+
+        public void delete(int id)
+        {
+              var obj = myDb.types.FirstOrDefault(x => x.idType == id);
+              myDb.types.Remove(obj);
+              myDb.SaveChanges();
+        }
+
+        public void update(QuanLyKhachSan.Models.Type type)
+        {
+            var obj = myDb.types.FirstOrDefault(x => x.idType == type.idType);
+            obj.name = type.name;
+            myDb.SaveChanges();
+        }
+
+        public QuanLyKhachSan.Models.Type getTypeId(int id)
+        {
+            return myDb.types.FirstOrDefault(x => x.idType == id);
+        }
+
+        public List<Room> getRoomType (int id)
+        {
+            return myDb.rooms.Where(x => x.idType == id).ToList();
+        }
     }
 }

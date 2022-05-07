@@ -31,5 +31,38 @@ namespace QuanLyKhachSan.Daos
             return myDb.bookings.FirstOrDefault(x => x.idBooking == id);
         }
 
+        public List<Booking> getAll()
+        {
+            return myDb.bookings.OrderByDescending(x => x.createdDate).ToList();
+        }
+
+        public List<BookingService> getBS(int id)
+        {
+            return myDb.BookingServices.Where(x => x.idBooking == id).ToList();
+        }
+
+        public void update(Booking booking)
+        {
+            var obj = myDb.bookings.FirstOrDefault(x => x.idBooking == booking.idBooking);
+            obj.status = booking.status;
+            obj.isPayment = booking.isPayment;
+            myDb.SaveChanges();
+        }
+
+        public int statictis(int month)
+        {
+            string SQL = "Select SUM(totalMoney) FROM Bookings WHERE MONTH(createdDate) = '" + month + "'  AND isPayment = 1 ";
+            int? result = myDb.Database.SqlQuery<int?>(SQL).FirstOrDefault();
+            if(result != null)
+            {
+                return (int)result;
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+
     }
 }

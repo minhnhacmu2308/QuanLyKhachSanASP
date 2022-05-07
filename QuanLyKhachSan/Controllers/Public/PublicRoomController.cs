@@ -22,7 +22,7 @@ namespace QuanLyKhachSan.Controllers.Public
             {
                 page = 1;
             }
-            ViewBag.List = roomDao.GetRoomsBlank(page, 10);
+            ViewBag.List = roomDao.GetRoomsBlank(page, 3);
             ViewBag.tag = page;
             ViewBag.pageSize = roomDao.GetNumberRoom();
             return View();
@@ -64,8 +64,9 @@ namespace QuanLyKhachSan.Controllers.Public
                 
                 if (checkExist == null || (checkExist != null && DateTime.Now > DateTime.Parse(checkExist.checkOutDate)))
                 {
-                    DateTime dateCheckout = DateTime.Parse(checkExist.checkOutDate);
-                    int numberBooking = DateTime.Now.Day - dateCheckout.Day;
+                    DateTime dateCheckout = DateTime.Parse(booking.checkOutDate);
+                    DateTime dateCheckin = DateTime.Parse(booking.checkInDate);
+                    int numberBooking = dateCheckout.Day - dateCheckin.Day;
                     Room room = roomDao.GetDetail(booking.idRoom);
                     booking.idUser = user.idUser;
                     booking.createdDate = DateTime.Now;
@@ -111,7 +112,7 @@ namespace QuanLyKhachSan.Controllers.Public
             }
             if (name == "" && idType != 0)
             {
-                ViewBag.List = roomDao.SearchByType(page, 2, idType);
+                ViewBag.List = roomDao.SearchByType(page, 3, idType);
                 ViewBag.tag = page;
                 ViewBag.key = 1;
                 ViewBag.idType = idType;
@@ -119,14 +120,14 @@ namespace QuanLyKhachSan.Controllers.Public
             }
             else if(name != "" && idType == 0)
             {
-                ViewBag.List = roomDao.SearchByName(page, 2, name);
+                ViewBag.List = roomDao.SearchByName(page, 3, name);
                 ViewBag.tag = page;
                 ViewBag.key = 2;
                 ViewBag.name = name;
                 ViewBag.pageSize = roomDao.GetNumberRoomByName(name);
             } else if (name != "" && idType != 0)
             {
-                ViewBag.List = roomDao.SearchByTypeAndName(page, 2,idType, name);
+                ViewBag.List = roomDao.SearchByTypeAndName(page, 3,idType, name);
                 ViewBag.tag = page;
                 ViewBag.key = 3;
                 ViewBag.name = name;
