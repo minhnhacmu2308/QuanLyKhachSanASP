@@ -110,7 +110,7 @@ namespace QuanLyKhachSan.Controllers.Public
             {
                 page = 1;
             }
-            if (name == "" && idType != 0)
+            if (name == null && idType != 0)
             {
                 ViewBag.List = roomDao.SearchByType(page, 3, idType);
                 ViewBag.tag = page;
@@ -118,14 +118,14 @@ namespace QuanLyKhachSan.Controllers.Public
                 ViewBag.idType = idType;
                 ViewBag.pageSize = roomDao.GetNumberRoomByType(idType);
             }
-            else if(name != "" && idType == 0)
+            else if(name != null && idType == 0)
             {
                 ViewBag.List = roomDao.SearchByName(page, 3, name);
                 ViewBag.tag = page;
                 ViewBag.key = 2;
                 ViewBag.name = name;
                 ViewBag.pageSize = roomDao.GetNumberRoomByName(name);
-            } else if (name != "" && idType != 0)
+            } else if (name != null && idType != 0)
             {
                 ViewBag.List = roomDao.SearchByTypeAndName(page, 3,idType, name);
                 ViewBag.tag = page;
@@ -134,7 +134,7 @@ namespace QuanLyKhachSan.Controllers.Public
                 ViewBag.idType = idType;
                 ViewBag.pageSize = roomDao.GetNumberRoomByNameAndType(name,idType);
             }
-            else if (name == "" && idType == 0)
+            else if (name == null && idType == 0)
             {
                 RedirectToAction("Index", "PublicHome");
             }

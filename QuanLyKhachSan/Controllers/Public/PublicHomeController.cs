@@ -22,5 +22,11 @@ namespace QuanLyKhachSan.Controllers.Public
             ViewBag.active = "home";
             return View();
         }
+
+        public ActionResult Contact()
+        {
+            ViewBag.active = "contact";
+            return View();
+        }
     }
 }

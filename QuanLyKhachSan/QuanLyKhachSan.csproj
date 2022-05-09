@@ -970,6 +970,7 @@
     <Content Include="Views\AdminBooking\Index.cshtml" />
     <Content Include="Views\AdminBooking\Detail.cshtml" />
     <Content Include="Views\AdminBooking\Bill.cshtml" />
+    <Content Include="Views\PublicHome\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
