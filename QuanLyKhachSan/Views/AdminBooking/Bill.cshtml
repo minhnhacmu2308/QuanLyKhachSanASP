@@ -80,6 +80,11 @@
 
                                             <input type="text" class="form-control" id="category-film" name="baohanh" value="Đã xác nhận" readonly>
                                         }
+                                        else if (ViewBag.Booking.status == 3)
+                                        {
+
+                                             <input type="text" class="form-control" id="category-film" name="baohanh" value="Đã trả phòng" readonly>
+                                        }
                                         else
                                         {
                                             <input type="text" class="form-control" id="category-film" name="baohanh" value="Đã hủy" readonly>
@@ -107,7 +112,6 @@
                                     <tr>
                                         <th scope="col">STT</th>
                                         <th scope="col">Dịch vụ</th>
-                                        <th scope="col">Giá tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,9 +122,6 @@
                                             <td style="width:10px">@stt</td>
                                             <td>
                                                 @item.Service.name
-                                            </td>
-                                            <td>
-                                                @item.Service.cost
                                             </td>
                                         </tr>
                                         stt++;

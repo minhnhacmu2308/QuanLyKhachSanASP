@@ -21,6 +21,11 @@ namespace QuanLyKhachSan.Daos
             return myDb.bookings.FirstOrDefault(x => x.idRoom == idRoom  && x.status != 2);
         }
 
+        public List<Booking> CheckBook(int idRoom)
+        {
+            return myDb.bookings.Where(x => x.idRoom == idRoom && x.status == 0 || x.status == 1).ToList();
+        }
+
         public List<Booking> GetBookingsByIdUser(int idUser)
         {
             return myDb.bookings.Where(x => x.idUser == idUser).ToList();

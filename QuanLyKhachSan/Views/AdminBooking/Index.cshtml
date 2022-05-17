@@ -70,6 +70,13 @@
                                     Đã xác nhận
                                 </td>
                             }
+                            else if (item.status == 3)
+                            {
+
+                                <td>
+                                    Đã trả phòng
+                                </td>
+                            }
                             else
                             {
                                 <td>
@@ -129,6 +136,11 @@
                                                         else if (item.status == 1)
                                                         {
                                                             <option selected value="1">Đã xác nhận</option>
+                                                            <option value="3">Đã trả phòng</option>
+                                                        }
+                                                        else if (item.status == 3)
+                                                        {
+                                                            <option selected value="3">Đã trả phòng</option>
                                                         }
                                                         else
                                                         {

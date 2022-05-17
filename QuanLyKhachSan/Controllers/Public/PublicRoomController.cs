@@ -40,7 +40,7 @@ namespace QuanLyKhachSan.Controllers.Public
             return View();
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Booking(Booking booking,int[] idService)
         {
             User user = (User)Session["USER"];
@@ -93,8 +93,91 @@ namespace QuanLyKhachSan.Controllers.Public
                     return RedirectToAction(action, new { mess = "ErrorExist" });
                 }
             }
+        }*/
+
+        [HttpPost]
+        public ActionResult Booking(Booking booking, int[] idService)
+        {
+            User user = (User)Session["USER"];
+            string action = "DetailRoom/" + booking.idRoom;
+            if (user == null)
+            {
+                return RedirectToAction(action, new { mess = "ErrorLogin" });
+            }
+            else
+            {
+                List<Booking> checkExist = bookingDao.CheckBook(booking.idRoom);
+                int priceService = 0;
+                if (idService != null)
+                {
+                    for (int i = 0; i < idService.Count(); i++)
+                    {
+
+                        priceService += serviceDao.GetCostById(idService[i]);
+                    }
+                }
+                if(checkExist.Count == 0)
+                {
+                    DateTime dateCheckout = DateTime.Parse(booking.checkOutDate);
+                    DateTime dateCheckin = DateTime.Parse(booking.checkInDate);
+                    int numberBooking = dateCheckout.Day - dateCheckin.Day;
+                    Room room = roomDao.GetDetail(booking.idRoom);
+                    booking.idUser = user.idUser;
+                    booking.createdDate = DateTime.Now;
+                    booking.isPayment = false;
+                    booking.status = 0;
+                    booking.totalMoney = (room.cost * numberBooking - room.cost * numberBooking * room.discount / 100) + priceService;
+                    bookingDao.Add(booking);
+                    if (idService != null)
+                    {
+                        for (int i = 0; i < idService.Count(); i++)
+                        {
+                            BookingService obj = new BookingService
+                            {
+                                idService = idService[i],
+                                idBooking = booking.idBooking
+                            };
+                            bookingServiceDao.Add(obj);
+                        }
+                    }
+                    return RedirectToAction(action, new { mess = "Success" });
+                }
+                else
+                {
+                    DateTime dateCheckout = DateTime.Parse(booking.checkOutDate);
+                    DateTime dateCheckin = DateTime.Parse(booking.checkInDate);
+                    foreach (Booking checkbooking in checkExist)
+                    {
+                        if((dateCheckin <= DateTime.Parse(checkbooking.checkOutDate) && dateCheckin >= DateTime.Parse(checkbooking.checkInDate)) || (dateCheckout <= DateTime.Parse(checkbooking.checkOutDate) && dateCheckout >= DateTime.Parse(checkbooking.checkInDate)))
+                        {
+                            return RedirectToAction(action, new { mess = "ErrorExist" });
+                        }
+                    }
+                    int numberBooking = dateCheckout.Day - dateCheckin.Day;
+                    Room room = roomDao.GetDetail(booking.idRoom);
+                    booking.idUser = user.idUser;
+                    booking.createdDate = DateTime.Now;
+                    booking.isPayment = false;
+                    booking.status = 0;
+                    booking.totalMoney = (room.cost * numberBooking - room.cost * numberBooking * room.discount / 100) + priceService;
+                    bookingDao.Add(booking);
+                    if (idService != null)
+                    {
+                        for (int i = 0; i < idService.Count(); i++)
+                        {
+                            BookingService obj = new BookingService
+                            {
+                                idService = idService[i],
+                                idBooking = booking.idBooking
+                            };
+                            bookingServiceDao.Add(obj);
+                        }
+                    }
+                    return RedirectToAction(action, new { mess = "Success" });
+                }
+            }
         }
-              
+
         [HttpPost]
         public ActionResult Search(FormCollection form)
         {

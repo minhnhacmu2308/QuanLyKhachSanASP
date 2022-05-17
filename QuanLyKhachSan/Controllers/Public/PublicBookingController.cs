@@ -45,7 +45,7 @@ namespace QuanLyKhachSan.Controllers.Public
         {
             var obj = myDb.bookings.Where(x => x.idBooking == id).FirstOrDefault();
             int total = obj.totalMoney;
-            string url = "https://localhost:44385/PublicBooking/GetBookings/" + obj.idUser;
+            string url = "https://localhost:44385/PublicBooking/ReturnUrl/" + id;
             //request params need to request to MoMo system
             string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
             string partnerCode = "MOMOOJOI20210710";
@@ -96,9 +96,17 @@ namespace QuanLyKhachSan.Controllers.Public
 
             JObject jmessage = JObject.Parse(responseFromMomo);
 
+           
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+        public ActionResult ReturnUrl(int id)
+        {
+            User user = (User)Session["USER"];
+            var obj = myDb.bookings.Where(x => x.idBooking == id).FirstOrDefault();
             obj.isPayment = true;
             myDb.SaveChanges();
-            return Redirect(jmessage.GetValue("payUrl").ToString());
+            return RedirectToAction("GetBookings", new { id = user.idUser, mess = "2" });
         }
 
         //Khi thanh toán xong ở cổng thanh toán Momo, Momo sẽ trả về một số thông tin, trong đó có errorCode để check thông tin thanh toán

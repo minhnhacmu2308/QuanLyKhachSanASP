@@ -30,6 +30,22 @@
         </script>
     </div>
 }
+@if (ViewBag.mess == "2")
+{
+    <div class="toast" data-delay="1000" style="position:fixed; top: 100PX; left: 40PX;z-index: 2000;width: 300px">
+
+        <script>
+            swal({
+                title: 'Thanh toán phòng thành công!',
+                /* text: 'Redirecting...', */
+                icon: 'success',
+                timer: 3000,
+                buttons: true,
+                type: 'success'
+            })
+        </script>
+    </div>
+}
 <section class="ftco-section ftco-degree-bg">
     <div class="container-fluid">
         <table class="table table-bordered">
@@ -51,79 +67,92 @@
                 @foreach (var item in ViewBag.listBooking)
                 {
                     index++;
-                <tr>
-                    <th scope="row">@index</th>
-                    <td>@item.checkInDate</td>
-                    <td>@item.checkOutDate</td>
-                    <td>@item.Room.name</td>
-                    @{ QuanLyKhachSan.Daos.BookingDao bookingDao = new QuanLyKhachSan.Daos.BookingDao();
-                        var list = bookingDao.getBS(item.idBooking);
-                    }
-                    <td>
-                        @foreach (var item1 in list)
-                        {
-                            <p>- @item1.Service.name</p>
+                    <tr>
+                        <th scope="row">@index</th>
+                        <td>@item.checkInDate</td>
+                        <td>@item.checkOutDate</td>
+                        <td>@item.Room.name</td>
+                        @{ QuanLyKhachSan.Daos.BookingDao bookingDao = new QuanLyKhachSan.Daos.BookingDao();
+                            var list = bookingDao.getBS(item.idBooking);
                         }
-                    </td>
-                    <td>@item.totalMoney VNĐ</td>
-                    @if (item.status == 0)
-                    {
                         <td>
-                            Chờ xác nhận
+                            @foreach (var item1 in list)
+                            {
+                                <p>- @item1.Service.name</p>
+                            }
                         </td>
-                    }
-                    else if (item.status == 1)
-                    {
+                        <td>@item.totalMoney VNĐ</td>
+                        @if (item.status == 0)
+                        {
+                            <td>
+                                Chờ xác nhận
+                            </td>
+                        }
+                        else if (item.status == 1)
+                        {
 
-                        <td>
-                            Đã xác nhận
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            Đã hủy
-                        </td>
-                    }
-                    @if (item.isPayment)
-                    {
-                        <td>
-                            Đã thanh toán
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            Chưa thanh toán
-                        </td>
-                    }
-                    @if (item.status == 0 && !item.isPayment)
-                    {
-                        <td style="width:169px">
-                            <a href="/PublicBooking/CancelBooking/@item.idBooking" style="width:70px" class="btn btn-danger">Hủy</a>
-                            <a href="/PublicBooking/PaymentMoMo/@item.idBooking" type="button" style="width:70px" class="btn btn-success">Momo</a>
-                        </td>
-                    }
-                    @if (item.status == 0 && item.isPayment)
-                    {
-                        <td style="width:150px">
-                            <a href="/AdminBooking/Bill/@item.idBooking" target="_blank" style="width:100px" class="btn btn-warning">In Bill</a>
-                        </td>
-                    }
-                    @if (item.status == 1 && item.isPayment)
-                    {
-                        <td style="width:150px">
-                            <a href="/AdminBooking/Bill/@item.idBooking" target="_blank" style="width:70px" class="btn btn-warning">In Bill</a>
-                        </td>
-                    }
-                    @if (item.status == 1 && !item.isPayment)
-                    {
-                        <td style="width:150px">
-                            <a href="/PublicBooking/PaymentMoMo/@item.idBooking" type="button" style="width:70px" class="btn btn-success">Momo</a>
-                        </td>
-                    }
+                            <td>
+                                Đã xác nhận
+                            </td>
+                        }
+                        else if (item.status == 3)
+                        {
 
-                </tr>
+                            <td>
+                                Đã trả phòng
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Đã hủy
+                            </td>
+                        }
+                        @if (item.isPayment)
+                        {
+                            <td>
+                                Đã thanh toán
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Chưa thanh toán
+                            </td>
+                        }
+                        @if (item.status == 0 && !item.isPayment)
+                        {
+                            <td style="width:169px">
+                                <a href="/PublicBooking/CancelBooking/@item.idBooking" style="width:70px" class="btn btn-danger">Hủy</a>
+                                <a href="/PublicBooking/PaymentMoMo/@item.idBooking" type="button" style="width:70px" class="btn btn-success">Momo</a>
+                            </td>
+                        }
+                        @if (item.status == 0 && item.isPayment)
+                        {
+                            <td style="width:150px">
+                                <a href="/AdminBooking/Bill/@item.idBooking" target="_blank" style="width:70px" class="btn btn-warning">In Bill</a>
+                            </td>
+                        }
+                        @if (item.status == 1 && item.isPayment)
+                        {
+                            <td style="width:150px">
+                                <a href="/AdminBooking/Bill/@item.idBooking" target="_blank" style="width:70px" class="btn btn-warning">In Bill</a>
+                            </td>
+                        }
+                        @if (item.status == 3 && item.isPayment)
+                        {
+                            <td style="width:150px">
+                                <a href="/AdminBooking/Bill/@item.idBooking" target="_blank" style="width:70px" class="btn btn-warning">In Bill</a>
+                            </td>
+                        }
+                        @if (item.status == 1 && !item.isPayment)
+                        {
+                            <td style="width:150px">
+                                <a href="/PublicBooking/PaymentMoMo/@item.idBooking" type="button" style="width:70px" class="btn btn-success">Momo</a>
+                            </td>
+                        }
+
+                    </tr>
                 }
 
             </tbody>
