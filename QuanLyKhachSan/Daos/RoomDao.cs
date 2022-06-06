@@ -40,7 +40,7 @@ namespace QuanLyKhachSan.Daos
         public List<Room> GetRoomsBlank(int page, int pagesize)
         {
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
-            return myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom)).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
+            return myDb.rooms.ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
         }
         public int GetNumberRoom()
         {
@@ -58,13 +58,13 @@ namespace QuanLyKhachSan.Daos
         public List<Room> SearchByName(int page, int pagesize,string name)
         {
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
-            return myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.name.Contains(name)).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
+            return myDb.rooms.Where(x => x.name.Contains(name)).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
         }
 
         public List<Room> SearchByType(int page, int pagesize,int idType)
         {
             var arrIdRoom = myDb.bookings.Where(x => x.status != 2).Select(x => x.idRoom).ToList();
-            return myDb.rooms.Where(x => !arrIdRoom.Contains(x.idRoom) && x.idType == idType).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
+            return myDb.rooms.Where(x => x.idType == idType).ToList().Skip((page - 1) * pagesize).Take(pagesize).ToList();
         }
 
         public int GetNumberRoomByType(int idType)
